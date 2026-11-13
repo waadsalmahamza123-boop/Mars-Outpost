@@ -1,0 +1,113 @@
+.start-page { 
+    min-height: 100vh;
+    background-color: #0b0d17;
+    background-image: linear-gradient(rgba(11, 13, 23, 0.6), rgba(11, 13, 23, 0.6)), url('../assets/mars.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+     gap: 50px;  
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    color: white;
+}
+.div1{
+  width: 90%;
+  height: 50px;
+  max-width: 1000px;
+  box-sizing: border-box;
+  background-color: rgba(235, 244, 255, 0.50);
+  border: 2px solid #90caf9;
+  border-radius: 20px;
+  padding: 35px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 90px;
+   
+}
+.div1 a {
+    background-color: #4B0082;   
+  color:  #ffffff;                 
+  text-decoration: none;     
+  font-size: 1rem;          
+  font-weight: bold;        
+  padding: 15px 45px;
+  border-radius: 15px;        
+  border: 2px solid #8E4FC4; 
+  cursor: pointer;
+  box-shadow:
+    0 0 18px rgba(75, 0, 130, 0.75),        
+    0 0 40px rgba(75, 0, 130, 0.35),        
+    inset 0 0 12px rgba(160, 110, 210, 0.35); 
+  transition: transform 0.2s, background-color 0.2s,
+              border-color 0.2s, box-shadow 0.2s;
+}
+
+.div1 a:hover {
+    background: #59148C;
+  border-color: #B99BE6;                    
+  box-shadow:
+    0 0 28px rgba(110, 30, 180, 0.95),
+    0 0 60px rgba(75, 0, 130, 0.6),
+    inset 0 0 16px rgba(190, 150, 240, 0.5);
+  transform: scale(1.08);
+}
+.div2 {
+  width: 90%;
+  height: 400px;
+  box-sizing: border-box;
+  background-color: rgba(235, 244, 255, 0.50);
+  border: 2px solid #90caf9;
+  border-radius: 20px;
+  padding: 35px;
+  max-width: 750px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 45px;
+}
+.div2 h1 {
+  font-size: 3.2rem;           
+  color: #000000;             
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); 
+  margin: 0;
+}
+.div2 p {
+  font-size: 1.4rem;          
+  color: #000000;           
+  line-height: 1.6;          
+  margin: 0;
+  text-align: center;
+}
+.start-btn {
+  background-color: #4B0082;   
+  color:  #ffffff;                 
+  text-decoration: none;     
+  font-size: 1.5rem;          
+  font-weight: bold;        
+  padding: 15px 45px;
+  border-radius: 15px;        
+  border: 2px solid #8E4FC4; 
+  cursor: pointer;
+  box-shadow:
+    0 0 18px rgba(75, 0, 130, 0.75),        
+    0 0 40px rgba(75, 0, 130, 0.35),        
+    inset 0 0 12px rgba(160, 110, 210, 0.35); 
+  transition: transform 0.2s, background-color 0.2s,
+              border-color 0.2s, box-shadow 0.2s;
+}
+.start-btn:hover {
+  background: #59148C;
+  border-color: #B99BE6;                    
+  box-shadow:
+    0 0 28px rgba(110, 30, 180, 0.95),
+    0 0 60px rgba(75, 0, 130, 0.6),
+    inset 0 0 16px rgba(190, 150, 240, 0.5);
+  transform: scale(1.08);
+  
+}
