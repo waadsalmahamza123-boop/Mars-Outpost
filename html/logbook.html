@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astronaut's Logbook/ Mars Outpost</title>
+    <link rel="stylesheet" href="../css/logbookstyle.css">
+</head>
+<body class="logbook-page">
+    <main class="logbook-container">
+
+        <!--Top Nav-->
+        <header class="logbook-header">
+            <div class="logbook-heading">
+                <span class="book-icon"></span>
+                
+                <div>
+                  <h1>ASTRONAUT'S LOGBOOK</h1>
+                  <P>Your Journey Through Mars</P>
+                </div>
+            </div>
+            <a herf="index.html" class="back-home">
+                BACK TO HOME
+            </a>
+
+        </header>
+
+        <!--Welcome Message-->
+        <section class="logbook-intro">
+            <div>
+                <span class="section-tag">PERSONAL MISSION RECORD</span>
+                <h2> Your Space Journey,<span>Recorded.</span></h2>
+                <p>
+                     Every challenge you complete makes you a better astronaut.
+                    Collect your badges, explore NASA discoveries, and keep
+                    learning about the Red Planet!                   
+                </p>
+            </div>
+            <div class="logbook-progress">
+                <span class="progress-label">BADGES COLLECTED</span>
+
+                <strong>
+                    <span id="badgesCount">0</span>/4
+                </strong>
+
+                <div class="progress-track">
+                    <div class="progress-fill" id="badgesProgress"></div>
+                </div>
+            </div>
+        </section>
+        
+       <!-- BADGES SECTION -->
+     <section class="logbook-section">
+
+         <div class="section-heading">
+             <div>
+                  <span class="section-tag">YOUR ACHIEVEMENTS</span>
+                  <h2>Mission Badges</h2>
+             </div>
+
+            <span class="section-counter">04 BADGES</span>
+         </div>
+
+         <div class="badges-grid">
+
+             <article class="badge-card locked" data-badge="radiationShield">
+                 <div class="badge-icon"><img src="../assets/storm.png" alt="storm budge"></div>
+                 <h3>Radiation Shield Commander</h3>
+                 <p>Successfully protect the crew from space radiation</p>
+                 <span class="badge-status">🔒 LOCKED</span>
+             </article>
+
+             <article class="badge-card locked" data-badge="visionGuardian">
+                 <div class="badge-icon"><img src="../assets/radiation.png" alt="radiation budge"> </div>
+                 <h3>Vision Guardian</h3>
+                 <p>Complete the astronaut eye-health challenge</p>
+                 <span class="badge-status">🔒 LOCKED</span>
+             </article>
+
+             <article class="badge-card locked" data-badge="fitnessCaptain">
+                 <div class="badge-icon"><img src="../assets/fitness.png" alt="fitness budge"></div>
+                 <h3>Fitness Captain</h3>
+                 <p>Maintain the crew's muscle and bone health</p>
+                 <span class="badge-status">🔒 LOCKED</span>
+             </article>
+
+             <article class="badge-card locked" data-badge="waterExpert">
+                 <div class="badge-icon"><img src="../assets/recycle.png" alt="recycle budge"></div>
+                 <h3>Water Recycling Expert</h3>
+                 <p>Keep the life-support water system running</p>
+                 <span class="badge-status">🔒 LOCKED</span>
+             </article>
+
+         </div>
+     </section>
+
+     <!-- NASA FACTS SECTION -->
+        <section class="logbook-section facts-section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-tag">EXPLORE THE RED PLANET</span>
+                    <h2>NASA Science Discoveries</h2>
+                </div>
+
+                <span class="section-counter">04 SCIENCE FILES</span>
+            </div>
+            <div class="facts-grid">
+                <!-- FACT 1 -->
+                <article class="fact-card">
+                    <div class="fact-illustration sleep-art">
+                        <span><img src="../assets/image.png" alt="man sleeping at the space"></span>
+                    </div>
+
+                    <div class="fact-content">
+                        <span class="fact-category">LIFE IN SPACE</span>
+
+                        <h3>How Do Astronauts Sleep?</h3>
+
+                        <p>
+                            In microgravity, astronauts can sleep in different
+                            orientations. They use special sleeping bags attached
+                            to the walls so they do not float around while sleeping.
+                        </p>
+
+                        <a href="https://www.nasa.gov/wp-content/uploads/2020/06/international_space_station_activity_kit.pdf"
+                           target="_blank" rel="noopener noreferrer" class="source-link">
+                            NASA SOURCE ↗
+                        </a>
+                    </div>
+
+                </article>
+
+                <!-- FACT 2 -->
+                <article class="fact-card">
+                    <div class="fact-illustration radiation-art">
+                        <span><img src="../assets/fact2.png" alt="man sleeping at the space"></span>
+                    </div>
+                    <div class="fact-content">
+                        <span class="fact-category">SPACE SAFETY</span>
+                        <h3>The Invisible Radiation</h3>
+                        <p>
+                            Mars has a thin atmosphere and no global magnetic
+                            field. This means astronauts need protection from
+                            harmful space radiation during future missions.
+                        </p>
+                        <a href="https://science.nasa.gov/resource/real-martians-how-to-protect-astronauts-from-space-radiation-on-mars/"
+                           target="_blank" rel="noopener noreferrer" class="source-link">
+                            NASA SOURCE ↗
+                        </a>
+                    </div>
+
+                </article>
+
+                <!-- FACT 3 -->
+                <article class="fact-card">
+                    <div class="fact-illustration plants-art">
+                        <span>🌱</span>
+                        <span class="fact-small-icon">💡</span>
+                    </div>
+                    <div class="fact-content">
+                        <span class="fact-category">SPACE AGRICULTURE</span>
+                        <h3>Can We Grow Plants in Space?</h3>
+                        <p>
+                            NASA's Veggie system grows plants aboard the
+                            International Space Station. This research helps
+                            scientists study how to provide fresh food on
+                            future deep-space missions.
+                        </p>
+                        <a href="https://www.nasa.gov/exploration-research-and-technology/growing-plants-in-space/"
+                           target="_blank" rel="noopener noreferrer" class="source-link">
+                            NASA SOURCE ↗
+                        </a>
+                    </div>
+                </article>
+
+                <!-- FACT 4 -->
+                <article class="fact-card">
+                    <div class="fact-illustration mars-art">
+                        <span>🔴</span>
+                        <span class="fact-small-icon">⏰</span>
+                    </div>
+                    <div class="fact-content">
+                        <span class="fact-category">MARS DISCOVERY</span>
+                        <h3>A Day on Mars</h3>
+                        <p>
+                            A Martian day, called a sol, lasts about 24 hours
+                            and 37 minutes. It is slightly longer than an
+                            Earth day!
+                        </p>
+                        <a href="https://science.nasa.gov/mars/facts/"
+                           target="_blank" rel="noopener noreferrer" class="source-link">
+                            NASA SOURCE ↗
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="logbook-footer">
+            <span>MISSION CONTROL — MARS OUTPOST</span>
+            <span>KEEP EXPLORING. KEEP DISCOVERING. 🚀</span>
+        </footer>
+
+    </main>
+
+    <script src="js/logbook.js"></script>
+
+</body>
+</html>

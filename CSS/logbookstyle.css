@@ -1,0 +1,685 @@
+
+/* ---------- 1. Design tokens ---------- */
+:root {
+    /* Space background */
+    --space-deep: #04060d;
+    --space-mid: #0b1226;
+    --space-glow-1: rgba(58, 76, 150, 0.55);
+    --space-glow-2: rgba(120, 70, 150, 0.35);
+    --space-glow-3: rgba(40, 110, 160, 0.30);
+
+    --glass: rgba(178, 190, 206, 0.34);
+    --glass-strong: rgba(196, 206, 220, 0.44);
+    --glass-soft: rgba(178, 190, 206, 0.24);
+    --glass-border: rgba(178, 212, 240, 0.80);
+    --glass-blur: 14px;
+    --glow-edge: 0 0 22px rgba(140, 195, 255, 0.35),
+                 0 0 60px rgba(90, 140, 220, 0.18);
+
+    /* Text */
+    --ink: #0a1018;              
+    --ink-soft: #1a2433;
+    --ink-muted: #33415a;
+    --navy: #123a56;            
+    --on-dark: #e8eef7;
+
+    /* Accents */
+    --accent: #5b1792;           
+    --accent-dark: #43106d;
+    --accent-light: #8b3fd0;
+    --cyan: #7fd3ff;
+    --gold: #ffcf5c;
+    --mars: #e2663f;
+
+    /* Shape */
+    --radius-xl: 26px;
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --radius-sm: 10px;
+
+    --font-serif: "Georgia", "Times New Roman", "Iowan Old Style", serif;
+    --font-sans: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+
+/* ---------- 2. Reset ---------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ---------- 3. Space background (pure CSS, no image needed) ---------- */
+body {
+    min-height: 100vh;
+    font-family: var(--font-serif);
+    color: var(--on-dark);
+    line-height: 1.65;
+    background-color: var(--space-deep);
+    background-image:
+        /* nebula clouds */
+        radial-gradient(ellipse 60% 45% at 18% 22%, var(--space-glow-1), transparent 70%),
+        radial-gradient(ellipse 50% 40% at 82% 30%, var(--space-glow-2), transparent 72%),
+        radial-gradient(ellipse 70% 50% at 55% 88%, var(--space-glow-3), transparent 75%),
+        /* star layers */
+        radial-gradient(1.6px 1.6px at 12% 18%, #ffffff 50%, transparent 51%),
+        radial-gradient(1.4px 1.4px at 27% 64%, #dfe9ff 50%, transparent 51%),
+        radial-gradient(1.8px 1.8px at 41% 32%, #ffffff 50%, transparent 51%),
+        radial-gradient(1.2px 1.2px at 58% 78%, #cfe0ff 50%, transparent 51%),
+        radial-gradient(1.7px 1.7px at 73% 21%, #ffffff 50%, transparent 51%),
+        radial-gradient(1.3px 1.3px at 88% 58%, #e6f0ff 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 6% 82%, #ffffff 50%, transparent 51%),
+        radial-gradient(1.1px 1.1px at 34% 92%, #d8e6ff 50%, transparent 51%),
+        radial-gradient(1.6px 1.6px at 66% 47%, #ffffff 50%, transparent 51%),
+        radial-gradient(1.2px 1.2px at 94% 12%, #ffffff 50%, transparent 51%),
+        radial-gradient(1.4px 1.4px at 49% 6%, #e8f1ff 50%, transparent 51%),
+        radial-gradient(1.3px 1.3px at 21% 44%, #ffffff 50%, transparent 51%),
+        radial-gradient(1.1px 1.1px at 80% 90%, #dfeaff 50%, transparent 51%),
+        linear-gradient(180deg, #04060d 0%, #0a1024 45%, #060912 100%);
+    background-size:
+        100% 100%, 100% 100%, 100% 100%,
+        900px 900px, 1100px 1100px, 780px 780px, 1250px 1250px,
+        980px 980px, 1350px 1350px, 860px 860px, 1150px 1150px,
+        1020px 1020px, 1280px 1280px, 940px 940px, 1200px 1200px,
+        100% 100%;
+    background-attachment: fixed;
+}
+
+/* Soft twinkle on the star layer */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+        radial-gradient(1.4px 1.4px at 15% 35%, rgba(255, 255, 255, 0.9) 50%, transparent 51%),
+        radial-gradient(1.6px 1.6px at 62% 15%, rgba(255, 255, 255, 0.85) 50%, transparent 51%),
+        radial-gradient(1.3px 1.3px at 84% 72%, rgba(255, 255, 255, 0.9) 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 38% 85%, rgba(255, 255, 255, 0.8) 50%, transparent 51%);
+    background-size: 700px 700px, 860px 860px, 780px 780px, 920px 920px;
+    animation: twinkle 6s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.35; }
+    to   { opacity: 0.95; }
+}
+
+/* Keep content above the star overlay */
+body > * {
+    position: relative;
+    z-index: 1;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    color: inherit;
+}
+
+/* ---------- 4. Page shell ---------- */
+.logbook-page {
+    padding: 34px 0 60px;
+}
+
+.logbook-container {
+    width: min(1180px, 92vw);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+}
+
+/* Reusable frosted panel (same look as Home card) */
+.glass {
+    background: var(--glass);
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--glow-edge), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+}
+
+/* ---------- 5. Header ---------- */
+.logbook-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 18px 30px;
+    background: var(--glass-strong);
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glow-edge), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+}
+
+.logbook-heading {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.logbook-heading h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.15rem, 2.2vw, 1.7rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--navy);
+    line-height: 1.15;
+}
+
+.logbook-heading p {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+}
+
+/* Back-to-home pill */
+.back-home {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    font-family: var(--font-serif);
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: #f3f7ff;
+    background: linear-gradient(180deg, var(--accent-light), var(--accent));
+    border: 2px solid #ffffff;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 6px 18px rgba(60, 10, 110, 0.55);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.back-home::before {
+    content: "←";
+    font-size: 1rem;
+}
+
+.back-home:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.12);
+    box-shadow: 0 10px 26px rgba(110, 40, 190, 0.65);
+}
+
+.back-home:focus-visible,
+.source-link:focus-visible {
+    outline: 3px solid var(--cyan);
+    outline-offset: 3px;
+}
+
+/* ---------- 6. Intro panel ---------- */
+.logbook-intro {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 34px;
+    align-items: center;
+    padding: 34px 38px;
+    background: var(--glass);
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--glow-edge), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+}
+
+.section-tag {
+    display: inline-block;
+    padding: 5px 14px;
+    margin-bottom: 12px;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #f4f8ff;
+    background: rgba(20, 40, 70, 0.65);
+    border: 1px solid rgba(180, 215, 250, 0.55);
+    border-radius: 999px;
+}
+
+.logbook-intro h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 3.2vw, 2.5rem);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 12px;
+}
+
+.logbook-intro h2 span {
+    color: var(--accent-light);
+    text-shadow: 0 0 18px rgba(150, 90, 220, 0.55);
+}
+
+.logbook-intro p {
+    max-width: 58ch;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+}
+
+/* Badge progress widget */
+.logbook-progress {
+    min-width: 230px;
+    padding: 20px 24px;
+    text-align: center;
+    background: var(--glass-soft);
+    border: 2px solid rgba(190, 220, 250, 0.65);
+    border-radius: var(--radius-lg);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.progress-label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--navy);
+}
+
+.logbook-progress strong {
+    display: block;
+    margin: 6px 0 12px;
+    font-family: var(--font-serif);
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--ink);
+}
+
+.logbook-progress strong span {
+    color: var(--accent-light);
+}
+
+.progress-track {
+    height: 12px;
+    border-radius: 999px;
+    background: rgba(10, 20, 35, 0.55);
+    border: 1px solid rgba(190, 220, 250, 0.5);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--cyan), var(--accent-light));
+    box-shadow: 0 0 14px rgba(127, 211, 255, 0.8);
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- 7. Generic section ---------- */
+.logbook-section {
+    padding: 32px 34px 36px;
+    background: var(--glass);
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--glow-edge), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+}
+
+.section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 16px;
+    margin-bottom: 26px;
+    border-bottom: 1px solid rgba(200, 225, 250, 0.4);
+}
+
+.section-heading h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    color: var(--ink);
+    line-height: 1.2;
+}
+
+.section-heading .section-tag {
+    margin-bottom: 8px;
+}
+
+.section-counter {
+    flex: 0 0 auto;
+    padding: 6px 16px;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--cyan);
+    background: rgba(10, 22, 40, 0.6);
+    border: 1px solid rgba(140, 200, 245, 0.5);
+    border-radius: 999px;
+}
+
+/* ---------- 8. Badges ---------- */
+.badges-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.badge-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: 26px 18px 20px;
+    background: rgba(200, 212, 228, 0.22);
+    border: 2px solid rgba(190, 220, 250, 0.6);
+    border-radius: var(--radius-lg);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.badge-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(210, 235, 255, 0.95);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35),
+                0 0 26px rgba(140, 195, 255, 0.45);
+}
+
+.badge-icon {
+    width: 92px;
+    height: 92px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.5), transparent 62%),
+        rgba(120, 150, 200, 0.32);
+    border: 2px solid rgba(195, 225, 255, 0.85);
+    box-shadow: 0 0 20px rgba(140, 195, 255, 0.4);
+    overflow: hidden;
+}
+
+.badge-icon img {
+    width: 62%;
+    height: 62%;
+    object-fit: contain;
+}
+
+.badge-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.08rem;
+    color: var(--ink);
+    line-height: 1.3;
+}
+
+.badge-card p {
+    font-size: 0.92rem;
+    color: var(--ink-muted);
+    line-height: 1.5;
+}
+
+.badge-status {
+    margin-top: auto;
+    padding: 5px 14px;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #cfe3f8;
+    background: rgba(10, 22, 40, 0.65);
+    border: 1px solid rgba(150, 195, 235, 0.45);
+    border-radius: 999px;
+}
+
+/* Locked state — dimmed until the badge is earned */
+.badge-card.locked {
+    filter: saturate(0.35);
+    opacity: 0.78;
+}
+
+.badge-card.locked:hover {
+    filter: saturate(0.75);
+    opacity: 1;
+}
+
+/* Unlocked state (add this class from JS when a badge is earned) */
+.badge-card.unlocked {
+    border-color: rgba(255, 214, 120, 0.9);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
+                0 0 28px rgba(255, 200, 90, 0.45);
+    animation: badgePop 0.6s ease;
+}
+
+.badge-card.unlocked .badge-icon {
+    border-color: rgba(255, 220, 140, 0.95);
+    box-shadow: 0 0 26px rgba(255, 205, 100, 0.65);
+}
+
+.badge-card.unlocked .badge-status {
+    color: #2a1c00;
+    background: linear-gradient(180deg, #ffe08a, var(--gold));
+    border-color: #fff2c6;
+}
+
+@keyframes badgePop {
+    0%   { transform: scale(0.94); }
+    55%  { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+
+/* ---------- 9. NASA facts ---------- */
+.facts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.fact-card {
+    display: grid;
+    grid-template-columns: 132px 1fr;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(200, 212, 228, 0.2);
+    border: 2px solid rgba(190, 220, 250, 0.6);
+    border-radius: var(--radius-lg);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.fact-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(210, 235, 255, 0.95);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.32),
+                0 0 24px rgba(140, 195, 255, 0.4);
+}
+
+.fact-illustration {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 132px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(200, 225, 250, 0.55);
+    font-size: 2.4rem;
+    overflow: hidden;
+}
+
+.fact-illustration::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.28), transparent 65%);
+    pointer-events: none;
+}
+
+.sleep-art      { background: linear-gradient(160deg, #1b2b5c, #2a3f7a 60%, #101a35); }
+.radiation-art  { background: linear-gradient(160deg, #5a2b18, #a8482a 60%, #2b1410); }
+.plants-art     { background: linear-gradient(160deg, #1c3d2a, #2f6b45 60%, #0f2318); }
+.mars-art       { background: linear-gradient(160deg, #4a1712, #b8472b 60%, #260c0a); }
+
+.fact-small-icon {
+    position: absolute;
+    right: 8px;
+    bottom: 6px;
+    font-size: 1.2rem;
+}
+
+.fact-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.fact-category {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--navy);
+}
+
+.fact-content h3 {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--ink);
+    line-height: 1.3;
+}
+
+.fact-content p {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+}
+
+.source-link {
+    align-self: flex-start;
+    margin-top: 4px;
+    padding: 6px 14px;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    color: var(--cyan);
+    background: rgba(10, 22, 40, 0.6);
+    border: 1px solid rgba(140, 200, 245, 0.55);
+    border-radius: 999px;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.source-link:hover {
+    color: #071018;
+    background: var(--cyan);
+    border-color: #ffffff;
+}
+
+/* ---------- 10. Footer ---------- */
+.logbook-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 28px;
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: #cfe0f5;
+    background: rgba(10, 20, 35, 0.5);
+    border: 1px solid rgba(150, 195, 235, 0.35);
+    border-radius: var(--radius-md);
+}
+
+/* ---------- 11. Responsive ---------- */
+@media (max-width: 1024px) {
+    .badges-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .facts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 760px) {
+    .logbook-page {
+        padding: 18px 0 40px;
+    }
+
+    .logbook-container {
+        width: min(1180px, 94vw);
+        gap: 18px;
+    }
+
+    .logbook-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 16px 20px;
+    }
+
+    .back-home {
+        align-self: stretch;
+        justify-content: center;
+    }
+
+    .logbook-intro {
+        grid-template-columns: 1fr;
+        padding: 26px 22px;
+    }
+
+    .logbook-progress {
+        min-width: 0;
+    }
+
+    .logbook-section {
+        padding: 24px 20px 28px;
+    }
+
+    .section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .badges-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fact-card {
+        grid-template-columns: 1fr;
+    }
+
+    .fact-illustration {
+        min-height: 110px;
+    }
+
+    .logbook-footer {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
