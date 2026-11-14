@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In / Mars Outpost Engineer</title>
+    <link rel="stylesheet" href="../css/sign.css">
+</head>
+<body>
+
+    <main class="sign-card">
+
+        <div class="sign-logo">🚀</div>
+        <h1>Mars Outpost Engineer</h1>
+        <p class="sign-sub">Sign in to save your mission progress</p>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" data-form="login">SIGN IN</button>
+            <button class="tab" data-form="register">SIGN UP</button>
+        </div>
+
+        <!-- SIGN IN -->
+        <form id="login" class="sign-form">
+            <label>Email
+                <input type="email" name="email" placeholder="astronaut@mars.com" required>
+            </label>
+
+            <label>Password
+                <input type="password" name="password" placeholder="••••••••" minlength="6" required>
+            </label>
+
+            <p class="message" id="loginMsg"></p>
+            <button type="submit" class="btn">START MISSION</button>
+        </form>
+
+        <!-- SIGN UP -->
+        <form id="register" class="sign-form hidden">
+            <label>Commander Name
+                <input type="text" name="name" placeholder="Your name" minlength="2" required>
+            </label>
+
+            <label>Email
+                <input type="email" name="email" placeholder="astronaut@mars.com" required>
+            </label>
+
+            <label>Password
+                <input type="password" name="password" placeholder="At least 6 characters" minlength="6" required>
+            </label>
+
+            <p class="message" id="registerMsg"></p>
+            <button type="submit" class="btn">CREATE ACCOUNT</button>
+        </form>
+
+        <a href="../html/index.html" class="back">← BACK TO HOME</a>
+    </main>
+
+    <script src="../js/sign.js"></script>
+</body>
+</html>
