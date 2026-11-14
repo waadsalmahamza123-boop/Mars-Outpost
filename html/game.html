@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mars Outpost Engineer — Mission</title>
+  <link rel="stylesheet" href="../CSS/style.css">
+</head>
+<body data-page="game">
+
+  <div id="app">
+    <header class="topbar">
+      <a class="brand" href="index.html">🔴 Mars Outpost Engineer</a>
+      <div class="top-stats">
+        <span>☀️ Space weather: <b id="stat-weather">Quiet ☀️</b></span>
+        <span>🌪️ Storms: <b id="stat-storms">0/5</b></span>
+        <span>⭐ Score: <b id="stat-score">0</b></span>
+        <span>🪐 Sol <b id="stat-sol">1</b></span>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" id="btn-mute" title="Sound on/off">🔊</button>
+        <button class="icon-btn" id="btn-pause" title="Pause">⏸</button>
+        <a class="icon-btn" href="logbook.html" title="Logbook">📖</a>
+      </div>
+    </header>
+
+    <div id="alert" class="alert hidden"></div>
+
+    <section class="dashboard">
+      <div class="meter" id="m-energy">
+        <div class="m-head"><span>⚡ Power used</span><b id="m-energy-val">0</b></div>
+        <div class="bar"><div class="fill" id="m-energy-bar"></div></div>
+      </div>
+      <div class="meter" id="m-oxygen">
+        <div class="m-head"><span>🫁 Oxygen</span><b id="m-oxygen-val">0</b></div>
+        <div class="bar"><div class="fill" id="m-oxygen-bar"></div></div>
+      </div>
+      <div class="meter" id="m-shield">
+        <div class="m-head"><span>🛡️ Radiation shield</span><b id="m-shield-val">0</b></div>
+        <div class="bar"><div class="fill" id="m-shield-bar"></div><i class="marker" id="shield-marker" title="Safe level"></i></div>
+      </div>
+      <div class="meter" id="m-temp">
+        <div class="m-head"><span>🌡️ Temperature</span><b id="m-temp-val">0</b></div>
+        <div class="bar"><div class="fill" id="m-temp-bar"></div></div>
+      </div>
+    </section>
+
+    <main class="board">
+      <section class="panel">
+        <h2>🔌 Power Routing Grid <small>tap a device to connect / disconnect</small></h2>
+        <div class="grid" id="grid">
+          <svg id="cables" aria-hidden="true"></svg>
+          <div class="generator" id="generator">
+            <div class="g-icon">☀️</div>
+            <b>Solar Array</b>
+            <span>100 kW</span>
+            <em id="gen-free">100 kW free</em>
+          </div>
+          <div class="devices" id="devices"></div>
+        </div>
+      </section>
+
+      <aside class="panel">
+        <h2>👩‍🚀 Crew Mood <span class="mood-big"><span id="mood-face">🙂</span> <b id="mood-val">80%</b></span></h2>
+        <div id="crew-list"></div>
+        <button class="btn tea" id="btn-tea" type="button">🍵 Tea &amp; meal break</button>
+      </aside>
+    </main>
+
+    <section class="panel">
+      <h2>📡 Mission Control</h2>
+      <ul id="feed" class="feed"></ul>
+    </section>
+  </div>
+
+  <!-- Wire puzzle (outside #app so it does not shake) -->
+  <div id="puzzle-modal" class="overlay hidden">
+    <div class="puzzle-card">
+      <h2>⚡ Surge! Reconnect the wires!</h2>
+      <p>Drag each wire on the left to the same colour on the right.</p>
+      <div class="timebar"><div id="puzzle-time"></div><span id="puzzle-secs"></span></div>
+      <div class="puzzle-board" id="puzzle-board">
+        <svg id="puzzle-svg"></svg>
+        <div class="col" id="puzzle-left"></div>
+        <div class="col" id="puzzle-right"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Generic pop-up: intro / pause / survived / fail / win -->
+  <div id="modal" class="overlay hidden"><div class="modal-card"></div></div>
+
+  <script src="../data/data.js"></script>
+  <script src="../js/resources.js"></script>
+  <script src="../js/crew.js"></script>
+  <script src="../js/storm.js"></script>
+  <script src="../js/puzzle.js"></script>
+  <script src="../js/logbook.js"></script>
+  <script src="../js/gameSpace.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
