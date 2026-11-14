@@ -35,7 +35,7 @@ registerForm.addEventListener("submit", function (e) {
     localStorage.setItem("marsUsers", JSON.stringify(users));
     localStorage.setItem("marsUser", JSON.stringify({ name: name, email: email }));
     showMsg(registerMsg, "Welcome, Commander " + name + "! Launching...", "ok");
-    setTimeout(function () { window.location.href = "../index.html"; }, 1200);
+    setTimeout(function () { window.location.href="/html/index.html"; }, 1200);
 });
 
 loginForm.addEventListener("submit", function (e) {
